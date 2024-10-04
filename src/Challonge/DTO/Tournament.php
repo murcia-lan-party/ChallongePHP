@@ -6,17 +6,10 @@ use Illuminate\Support\Collection;
 use Reflex\Challonge\DtoClientTrait;
 use Reflex\Challonge\Exceptions\StillRunningException;
 use Reflex\Challonge\Exceptions\AlreadyStartedException;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class Tournament extends DataTransferObject
+class Tournament
 {
     use DtoClientTrait;
-
-    /**
-     * Due to Challonge not locking their API and constantly adding new fields...
-     * @var bool
-     */
-    protected bool $ignoreMissing = true;
 
     public int $id;
     public string $name;

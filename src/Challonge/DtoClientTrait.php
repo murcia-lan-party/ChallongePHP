@@ -2,6 +2,7 @@
 
 namespace Reflex\Challonge;
 
+use CuyZ\Valinor\MapperBuilder;
 use Reflex\Challonge\DTO\BaseDto;
 
 trait DtoClientTrait
@@ -16,9 +17,14 @@ trait DtoClientTrait
      */
     public static function fromResponse(ClientWrapper $client, array $data): self
     {
-        $dto = new self($data);
-        $dto->setClient($client);
-        return $dto;
+        return (new MapperBuilder())
+            ->enableFlexibleCasting()
+            // challonge doesn't lock their API, and constantly adds new fields
+            ->allowSuperfluousKeys()
+            // property types aren't documented anywhere
+            ->allowPermissiveTypes()
+            ->mapper()
+            ->map(self::class, [...$data, "client" => $client]);
     }
 
     /**

@@ -3,17 +3,10 @@
 namespace Reflex\Challonge\DTO;
 
 use Reflex\Challonge\DtoClientTrait;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class Participant extends DataTransferObject
+class Participant
 {
     use DtoClientTrait;
-
-    /**
-     * Due to Challonge not locking their API and constantly adding new fields...
-     * @var bool
-     */
-    protected bool $ignoreMissing = true;
 
     public bool $active;
     public bool $check_in_open;
@@ -51,6 +44,8 @@ class Participant extends DataTransferObject
     public bool $can_check_in;
     public bool $checked_in;
     public bool $reactivatable;
+    public array $groups;
+    public array $final;
 
     /**
      * Update the attributes of a tournament participant.
