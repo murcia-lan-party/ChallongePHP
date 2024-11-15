@@ -55,6 +55,13 @@ composer-add-dep:
     $(user) \
     composer:latest require $(module) --ignore-platform-reqs --no-scripts
 
+# remove PHP Dependencies via Composer - usage make composer-rm-dep module=module/namehere
+composer-rm-dep:
+	docker run --rm --name compose-maintainence-update --interactive \
+    --volume $(currentDir):/app \
+    $(user) \
+    composer:latest remove $(module) --ignore-platform-reqs --no-scripts
+
 # add Dev PHP Dependencies via Composer - usage make composer-add-dep-dev module=module/namehere
 composer-add-dep-dev:
 	docker run --rm --name compose-maintainence-update --interactive \
